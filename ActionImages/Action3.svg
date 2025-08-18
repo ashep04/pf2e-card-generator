@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 629.64 300">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Triple_Action" data-name="Triple Action">
+    <rect class="cls-1" x="16.48" y="110.23" width="79.55" height="79.55" transform="translate(-89.59 83.71) rotate(-45)"/>
+    <polygon class="cls-1" points="304.26 150 154.26 0 79.26 75 154.26 150 79.26 225 154.26 300 229.26 225 229.26 225 304.26 150"/>
+    <polygon class="cls-1" points="478.18 150 344.05 15.87 276.98 82.94 344.05 150 276.98 217.06 344.05 284.13 411.11 217.06 411.11 217.06 478.18 150"/>
+    <polygon class="cls-1" points="629.64 150 524.27 44.64 471.59 97.32 524.27 150 471.59 202.68 524.27 255.36 576.96 202.68 576.96 202.68 629.64 150"/>
+  </g>
+</svg>

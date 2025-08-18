@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Free_Action" data-name="Free Action">
+    <path class="cls-1" d="M150,0L0,150l150,150,150-150L150,0ZM78.41,112.84l37.16,37.16-37.16,37.16-37.16-37.16,37.16-37.16ZM115.91,224.66l74.66-74.66-37.5-37.5h0s-37.16-37.16-37.16-37.16l34.09-34.09,108.75,108.75-108.75,108.75-34.09-34.09Z"/>
+  </g>
+</svg>
