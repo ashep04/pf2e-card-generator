@@ -149,6 +149,8 @@ hr
     appearance: none;
     text-align: right;
     min-width: 0;
+    margin: 0;
+    padding: 0;
 }
 #feat-header
 {

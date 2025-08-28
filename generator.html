@@ -58,6 +58,33 @@
         };
       }
 
+      // Resize action cost box
+      function resizeSelect(select)
+      {
+        var selectedText = select.options[select.selectedIndex].text;
+
+        var span = document.createElement("span");
+        var style = getComputedStyle(select, "print")
+        span.style.visibility = "hidden";
+        span.style.whiteSpace = "nowrap";
+        span.style.letterSpacing = style.letterSpacing;
+        span.style.fontFamily = style.fontFamily;
+        span.style.fontSize = "30px";
+        span.textContent = selectedText;
+        document.body.appendChild(span);
+
+        select.style.width = span.getBoundingClientRect().width + "px";
+        console.log(span.style.fontSize);
+
+        document.body.removeChild(span);
+      }
+
+      var actionSelects = document.querySelectorAll(".action-cost");
+      window.addEventListener("beforeprint", () => 
+      {
+        actionSelects.forEach(select => resizeSelect(select));
+      });
+
       // Autosizes the font for the feat name
       const maxFontSize = 16;
       const minFontSize = 4;
