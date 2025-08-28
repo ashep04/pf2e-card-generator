@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+    <div class="grid" id="grid">
+      <div class="feat-card" id="card0">
+        <div id="feat-header">
+          <input type="text" class="feat-name" placeholder="Feat Name" autocomplete="off">
+          <select class="action-cost" autocomplete="off">
+            <option value=""></option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+          </select>
+        </div>
+        <hr/>
+      </div>
+    </div>
+
+    <script>
+      const grid = document.getElementById("grid");
+      const baseCard = document.getElementById("card0")
+      for (let i = 1; i < 8; i++)
+      {
+        var newCard = baseCard.cloneNode(true);
+        newCard.setAttribute("id", `card${i}`);
+        grid.appendChild(newCard);
+      }
+
+      const maxFontSize = 16;
+      const minFontSize = 4;
+      function autoSizeFont()
+      {
+        var inputs = document.querySelectorAll(".feat-name");
+        inputs.forEach(input => {
+          let style = window.getComputedStyle(input)
+          let fontSize = maxFontSize;
+
+          input.style.fontSize = fontSize + "pt";
+
+          while (input.scrollWidth > input.clientWidth && fontSize > minFontSize)
+          {
+            fontSize -= .5;
+            input.style.fontSize = fontSize + "pt";
+          }
+
+          input.style.fontSize = (fontSize + 1) + "pt";
+        });
+      }
+
+      window.addEventListener("beforeprint", () => autoSizeFont()); 
+
+      var allSelects = document.querySelectorAll(".action-cost");
+      allSelects.forEach(setupSelect);
+
+      function setupSelect(select)
+      {
+        let previousOption = select.options[select.selectedIndex];
+        [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
+
+        select.addEventListener("change", () => 
+        {
+          var currentOption = select.options[select.selectedIndex];
+      
+          [currentOption.text, currentOption.value] = [currentOption.value, currentOption.text];
+
+          [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
+ 
+          previousOption = currentOption;
+        });
+      }
+    </script>
+  </div>
+</body>
+</html>
