@@ -94,6 +94,21 @@ body
     min-width: 0;
     line-height: 1;
 }
+.feat-traits
+{
+}
+.feat-trait
+{
+    font-family: "Myriad Apple";
+    color: white;
+    background: #5c0b0c;
+    border: none;
+    min-width: 1ch;
+    box-sizing: content-box;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+}
 hr
 {
     background: black;
@@ -102,6 +117,14 @@ hr
     border-radius: 1px;
     margin-top: 1px;
     margin-bottom: 1px;
+}
+.feat-traits
+{
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
 }
 }
 
@@ -132,6 +155,10 @@ hr
 {
     grid-template-columns: 1fr auto;
 }
+.add-trait
+{
+    display: none;
+}
 }
 
 @media screen
@@ -143,5 +170,14 @@ hr
 #feat-header
 {
     grid-template-columns: 3fr 1fr;
+}
+.add-trait
+{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 }

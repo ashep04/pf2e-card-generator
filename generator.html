@@ -23,19 +23,42 @@
           </select>
         </div>
         <hr/>
+        <div class="feat-traits" id="feat-traits">
+          <span contenteditable="true" type="text" class="feat-trait" size=1 autocomplete="off" id="baseTrait">
+            Trait
+          </span>
+          <button class="add-trait" id="add-trait">+</button>
+        </div>
+        <hr/>
       </div>
     </div>
 
     <script>
+      // Duplicates the card to fill the page
       const grid = document.getElementById("grid");
-      const baseCard = document.getElementById("card0")
+      const baseCard = document.getElementById("card0");
+      const traits = document.getElementById("feat-traits");
+      const baseTrait = document.getElementById("baseTrait");
+
+      attachButton(baseCard);
       for (let i = 1; i < 8; i++)
       {
         var newCard = baseCard.cloneNode(true);
         newCard.setAttribute("id", `card${i}`);
         grid.appendChild(newCard);
+        attachButton(newCard);
       }
 
+      function attachButton(card)
+      {
+        var addButton = card.querySelector(".add-trait");
+        addButton.onclick = () => {
+          var newTrait = baseTrait.cloneNode(true);
+          card.querySelector("#feat-traits").insertBefore(newTrait, addButton);
+        };
+      }
+
+      // Autosizes the font for the feat name
       const maxFontSize = 16;
       const minFontSize = 4;
       function autoSizeFont()
@@ -62,6 +85,7 @@
       var allSelects = document.querySelectorAll(".action-cost");
       allSelects.forEach(setupSelect);
 
+      // Changes the select option to the symbol
       function setupSelect(select)
       {
         let previousOption = select.options[select.selectedIndex];
