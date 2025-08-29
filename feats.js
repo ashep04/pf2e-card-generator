@@ -1,14 +1,14 @@
+const maxFontSize = 16;
+const minFontSize = 4;
+
 document.addEventListener("DOMContentLoaded", () => 
 {
-  // Duplicates the card to fill the page
   const grid = document.getElementById("grid");
   const baseCard = document.getElementById("card0");
   const traits = document.getElementById("feat-traits");
   const baseTrait = document.getElementById("baseTrait");
 
-  console.log(baseCard);
   attachButton(baseCard);
-
   for (let i = 1; i < 8; i++)
   {
     var newCard = baseCard.cloneNode(true);
@@ -18,21 +18,30 @@ document.addEventListener("DOMContentLoaded", () =>
   }
 
   var actionSelects = document.querySelectorAll(".action-cost");
+  var featNames = document.querySelectorAll(".feat-name");
   window.addEventListener("beforeprint", () => 
   {
     actionSelects.forEach(select => resizeSelect(select));
   });
 
-  // Autosizes the font for the feat name
-  const maxFontSize = 16;
-  const minFontSize = 4;
-
-  window.addEventListener("beforeprint", () => autoSizeFont()); 
+  window.matchMedia('print').addEventListener('change', (e) => 
+  {
+    if (e.matches) 
+    {
+      featNames.forEach(name => autoSizeFont(name));
+    }
+    else
+    {
+      // Run code for when print menu closes.
+      // Reset boxes.
+    }
+  });
 
   var allSelects = document.querySelectorAll(".action-cost");
   allSelects.forEach(setupSelect);
 });
 
+// Attach functionality for trait addition buttons
 function attachButton(card)
 {
   var addButton = card.querySelector(".add-trait");
@@ -62,23 +71,21 @@ function resizeSelect(select)
   document.body.removeChild(span);
 }
 
-function autoSizeFont()
+function autoSizeFont(name)
 {
-  var inputs = document.querySelectorAll(".feat-name");
-  inputs.forEach(input => {
-    let style = window.getComputedStyle(input)
-    let fontSize = maxFontSize;
+  name.style.fontSize = maxFontSize + "pt";
+  void name.offsetWidth;
 
-    input.style.fontSize = fontSize + "pt";
+  //console.log(name.scrollWidth + " | " + name.clientWidth);
+  console.log(name.scrollWidth, name.clientWidth, name.offsetWidth, name.getBoundingClientRect().width);
 
-    while (input.scrollWidth > input.clientWidth && fontSize > minFontSize)
-    {
-      fontSize -= .5;
-      input.style.fontSize = fontSize + "pt";
-    }
-
-    input.style.fontSize = (fontSize + 1) + "pt";
-  });
+  if (name.scrollWidth > name.clientWidth)
+  {
+    let ratio = name.clientWidth / name.scrollWidth;
+    // Account for slight overfill. 
+    ratio -= 0.01;
+    name.style.fontSize = (maxFontSize * ratio) + "pt";
+  }
 }
 
 // Changes the select option to the symbol
