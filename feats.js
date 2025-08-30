@@ -76,9 +76,6 @@ function autoSizeFont(name)
   name.style.fontSize = maxFontSize + "pt";
   void name.offsetWidth;
 
-  //console.log(name.scrollWidth + " | " + name.clientWidth);
-  console.log(name.scrollWidth, name.clientWidth, name.offsetWidth, name.getBoundingClientRect().width);
-
   if (name.scrollWidth > name.clientWidth)
   {
     let ratio = name.clientWidth / name.scrollWidth;
