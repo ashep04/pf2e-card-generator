@@ -138,13 +138,12 @@ hr
     border: none;
     font-family: "Jubilee";
     font-size: 16pt;
-    background: powderblue;
     text-align: left;
 }
 .action-cost
 {
     font-size: 30px;
-    background: red;
+    background: none;
     border: none;
     appearance: none;
     text-align: right;
