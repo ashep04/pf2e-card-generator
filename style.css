@@ -121,7 +121,24 @@ hr
     flex-wrap: wrap;
     gap: 5px;
     align-items: center;
-    width: 100%
+    width: 100%;
+}
+.feat-info
+{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.feat-info-input, p
+{
+    font-family: "Gandhi Sans";
+    font-size: 8pt;
+}
+p
+{   
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 }
 
@@ -154,13 +171,18 @@ hr
 {
     grid-template-columns: 1fr auto;
 }
-.add-trait
+.add-trait, 
+.feat-traits:not(:has(.feat-trait)),
+.feat-traits:not(:has(.feat-trait)) + .trait-hr,
+.feat-info-input:placeholder-shown, 
+.feat-info:has(> .feat-info-input:placeholder-shown) p,
+.info-hr
 {
     display: none;
 }
-.feat-traits:not(:has(.feat-trait)) + .trait-hr
+.feat-info:has(.feat-info-input:not(:placeholder-shown)) ~ .info-hr
 {
-    display: none;
+    display: block;
 }
 }
 
