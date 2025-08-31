@@ -188,11 +188,13 @@ hr
 .feat-traits:not(:has(.feat-trait)) + .trait-hr,
 .feat-info-input:empty, 
 .feat-info:has(.feat-info-input:empty) p,
-.info-hr
+.info-hr,
+.final-hr
 {
     display: none;
 }
-.feat-info:has(.feat-info-input:not(:empty)) ~ .info-hr
+.feat-info:has(.feat-info-input:not(:empty)) ~ .info-hr,
+.possible-final:has(.feat-info-input:not(:empty)):has(~ div span:not(:empty)) .final-hr
 {
     display: block;
 }
