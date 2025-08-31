@@ -76,6 +76,7 @@ body
     padding: 0.125in;
     border: solid black 10px;
     box-sizing: border-box;
+    overflow: auto;
 }
 .action-cost
 {
