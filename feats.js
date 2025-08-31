@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () =>
   const baseCard = document.getElementById("card0");
   const traits = document.getElementById("feat-traits");
   const baseTrait = document.getElementById("baseTrait");
+  // Remove element so cards start with no traits
+  //document.getElementById("baseTrait").remove();
+  //baseTrait.remove();
 
   attachButton(baseCard);
   for (let i = 1; i < 8; i++)
@@ -46,9 +49,20 @@ function attachButton(card)
 {
   var addButton = card.querySelector(".add-trait");
   addButton.onclick = () => {
-    var newTrait = baseTrait.cloneNode(true);
-    card.querySelector("#feat-traits").insertBefore(newTrait, addButton);
+    card.querySelector("#feat-traits").insertBefore(createTrait(), addButton);
   };
+}
+
+function createTrait()
+{
+  const span = document.createElement("span");
+  span.contentEditable = "true";
+  span.className = "feat-trait";
+  span.setAttribute("type", "text");
+  span.setAttribute("size", "1");
+  span.setAttribute("autocomplete", "off");
+  span.textContent = "Trait";
+  return span;
 }
 
 // Resize action cost box
