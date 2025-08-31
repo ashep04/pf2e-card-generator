@@ -34,8 +34,10 @@ document.addEventListener("DOMContentLoaded", () =>
     }
     else
     {
-      // Run code for when print menu closes.
-      // Reset boxes.
+      document.querySelectorAll("*").forEach(element => 
+      {
+        element.style.all = null;
+      });
     }
   });
 
