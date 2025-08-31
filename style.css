@@ -123,18 +123,21 @@ hr
     align-items: center;
     width: 100%;
 }
-.feat-info
+.feat-info, .feat-description
 {
     display: flex;
     align-items: center;
     margin: 0;
 }
-.feat-info p
+.feat-info p, .feat-info-input
 {
     font-family: "Gandhi Sans";
     font-size: 8pt;
     margin: 0;
     padding: 0;
+}
+.feat-info p
+{
     font-weight: bold;
 }
 .feat-info-input
