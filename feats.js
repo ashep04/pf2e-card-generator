@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", () =>
   const baseCard = document.getElementById("card0");
   const traits = document.getElementById("feat-traits");
   const baseTrait = document.getElementById("baseTrait");
-  // Remove element so cards start with no traits
-  //document.getElementById("baseTrait").remove();
-  //baseTrait.remove();
 
   attachButton(baseCard);
   for (let i = 1; i < 8; i++)
@@ -19,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () =>
     grid.appendChild(newCard);
     attachButton(newCard);
   }
+  const featCards = document.querySelectorAll(".feat-card");
 
   var actionSelects = document.querySelectorAll(".action-cost");
   var featNames = document.querySelectorAll(".feat-name");
@@ -32,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () =>
     if (e.matches) 
     {
       featNames.forEach(name => autoSizeFont(name));
+      featCards.forEach(card => checkOverflow(card));
     }
     else
     {
@@ -43,6 +42,34 @@ document.addEventListener("DOMContentLoaded", () =>
   var allSelects = document.querySelectorAll(".action-cost");
   allSelects.forEach(setupSelect);
 });
+
+function checkOverflow(card)
+{
+  var textBoxes = card.querySelectorAll(".feat-info p, .feat-info-input");
+
+  var min = 1;
+  var max = 13;
+  var iteration = 0;
+
+  while (iteration < 20)
+  {
+    var mid = (min + max) / 2;
+    textBoxes.forEach(box => box.style.fontSize = mid + "px");
+
+    if (card.scrollHeight > card.clientHeight)
+    {
+      max = mid;
+    }
+    else
+    {
+      min = mid; 
+    }
+
+    iteration++;
+  }
+
+  textBoxes.forEach(box => box.style.fontSize = min + "px");
+}
 
 // Attach functionality for trait addition buttons
 function attachButton(card)
