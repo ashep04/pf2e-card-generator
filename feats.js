@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () =>
     grid.appendChild(newCard);
     attachButton(newCard);
   }
-  const featCards = document.querySelectorAll(".feat-card");
+  const featCards = document.querySelectorAll(".feat-card-inner");
 
   var actionSelects = document.querySelectorAll(".action-cost");
   var featNames = document.querySelectorAll(".feat-name");

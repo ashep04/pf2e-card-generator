@@ -71,12 +71,31 @@ body
 }
 .feat-card
 {
+    position: relative;
+    z-index: 1;
     width: 2.5in;
     height: 3.5in;
     padding: 0.125in;
-    border: solid black 10px;
+    border: solid black 5px;
     box-sizing: border-box;
+    overflow: hidden;
+    background: black;
+}
+.feat-card::before
+{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: white;
+    inset: 0;
+    border-radius: .8em;
+}
+.feat-card-inner
+{
     overflow: auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 .action-cost
 {
