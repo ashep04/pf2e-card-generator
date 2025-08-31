@@ -114,18 +114,6 @@ body
     min-width: 0;
     line-height: 1;
 }
-.feat-trait
-{
-    font-family: "Myriad Apple";
-    color: white;
-    background: #5c0b0c;
-    border: none;
-    min-width: 1ch;
-    box-sizing: content-box;
-    padding-left: 3px;
-    padding-right: 3px;
-    padding-top: 3px;
-}
 hr
 {
     background: black;
@@ -135,13 +123,28 @@ hr
     margin-top: 1px;
     margin-bottom: 1px;
 }
+.feat-trait
+{
+    font-family: "Myriad Apple";
+    font-size: 8pt;
+    color: white;
+    background: #5c0b0c;
+    border: none;
+    min-width: 1ch;
+    box-sizing: content-box;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+}
 .feat-traits
 {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     gap: 5px;
     align-items: center;
     width: 100%;
+    margin-top: 2px;  
+    margin-bottom: 2px;  
 }
 .feat-info, .feat-description
 {
@@ -280,8 +283,8 @@ hr
 }
 .add-trait
 {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
