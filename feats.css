@@ -97,6 +97,15 @@ body
     height: 100%;
     width: 100%;
 }
+.spell-level
+{
+    font-family: "Gandhi Sans";
+    box-sizing: border-box;
+    font-size: 7pt;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 .action-cost
 {
     font-family: "Pathfinder Actions";
@@ -231,7 +240,7 @@ hr
     background: black;
     justify-self: center;
 }
-.feat-name::placeholder
+.feat-name::placeholder, .spell-level::placeholder
 {
     color: transparent;
 }
@@ -241,6 +250,11 @@ hr
     font-family: "Jubilee";
     font-size: 16pt;
     text-align: left;
+}
+.spell-level
+{
+    border: none;
+    background: none;
 }
 .action-cost
 {
