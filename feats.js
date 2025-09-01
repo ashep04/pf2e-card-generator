@@ -1,5 +1,13 @@
 const maxFontSize = 16;
 const minFontSize = 4;
+const actionMap =
+{
+  "[one-action]": "1",
+  "[two-actions]": "2",
+  "[three-actions]": "3",
+  "[free-action]": "4",
+  "[reaction]": "5",
+}
 
 document.addEventListener("DOMContentLoaded", () => 
 {
@@ -30,10 +38,18 @@ document.addEventListener("DOMContentLoaded", () =>
     if (e.matches) 
     {
       featNames.forEach(name => autoSizeFont(name));
-      featCards.forEach(card => checkOverflow(card));
+      featCards.forEach(card => 
+      {
+        replaceSymbols(card, actionMap);
+        checkOverflow(card);
+      });
     }
     else
     {
+      featCards.forEach(card => 
+      {
+        restoreSymbols(card, actionMap);
+      });
       document.querySelectorAll("*").forEach(element => 
       {
         element.style.all = null;
@@ -44,6 +60,42 @@ document.addEventListener("DOMContentLoaded", () =>
   var allSelects = document.querySelectorAll(".action-cost");
   allSelects.forEach(setupSelect);
 });
+
+function replaceSymbols(card, dictionary)
+{
+    var spans = card.querySelectorAll(".feat-info-input");
+
+    spans.forEach(span => 
+    {
+      var text = span.textContent;
+
+      for (var [word, mappedWord] of Object.entries(dictionary))
+      {
+        var escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var regex = new RegExp(`${escapedWord}`, 'gi');
+        text = text.replace(regex, `<span class="action-text">${mappedWord}</span>`);
+      }
+
+      span.innerHTML = text;
+    });
+}
+
+function restoreSymbols(card, dictionary) {
+    var spans = card.querySelectorAll(".feat-info-input");
+
+    spans.forEach(span => {
+        var html = span.innerHTML;
+
+        console.log(html);
+        for (var [word, mappedWord] of Object.entries(dictionary)) 
+        {
+            var regex = new RegExp(`<span class="action-text">${mappedWord}</span>`, 'gi');
+            html = html.replace(regex, word);
+        }
+
+        span.innerHTML = html;
+    });
+}
 
 function checkOverflow(card)
 {
