@@ -258,7 +258,8 @@ hr
 {
     grid-template-columns: 1fr auto;
 }
-.add-trait, 
+.add-trait,
+.add-heightened,
 .feat-traits:not(:has(.feat-trait)),
 .feat-traits:not(:has(.feat-trait)) + .trait-hr,
 .feat-info-input:empty, 
@@ -285,7 +286,8 @@ hr
 {
     grid-template-columns: 3fr 1fr;
 }
-.add-trait
+.add-trait, 
+.add-heightened
 {
     width: 13px;
     height: 13px;

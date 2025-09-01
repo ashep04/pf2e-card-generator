@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () =>
   const grid = document.getElementById("grid");
   const baseCard = document.getElementById("card0");
   const traits = document.getElementById("feat-traits");
-  const baseTrait = document.getElementById("baseTrait");
+  const baseHeightened = document.getElementById("baseHeightened");
 
   attachButton(baseCard);
   for (let i = 1; i < 8; i++)
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () =>
     newCard.setAttribute("id", `card${i}`);
     grid.appendChild(newCard);
     attachButton(newCard);
+    heightenedButton(newCard, baseHeightened);
   }
   const featCards = document.querySelectorAll(".feat-card-inner");
 
@@ -129,8 +130,19 @@ function checkOverflow(card)
 function attachButton(card)
 {
   var addButton = card.querySelector(".add-trait");
-  addButton.onclick = () => {
+  addButton.onclick = () =>
+  {
     card.querySelector("#feat-traits").insertBefore(createTrait(), addButton);
+  };
+}
+
+function heightenedButton(card, heightened)
+{
+  var addButton = card.querySelector(".add-heightened");
+  addButton.onclick = () =>
+  {
+    var newHeightened = heightened.cloneNode(true);
+    card.querySelector(".possible-final.heightened").insertBefore(newHeightened, addButton);
   };
 }
 
