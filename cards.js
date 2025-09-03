@@ -60,7 +60,7 @@ function setupCard(card, baseHeightened)
 {
   attachHeightenedButton(card, baseHeightened);
   attachTraitButton(card);
-  setupSelect(card)
+  setupSelect(card);
 }
 
 // Attach functionality to heightened addition button
@@ -100,14 +100,17 @@ function createTrait()
 // Changes the select option to the symbol
 function setupSelect(card)
 {
-  select = card.querySelector(".action-cost");
+  const select = card.querySelector(".action-cost");
 
   let previousOption = select.options[select.selectedIndex];
   [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
 
   select.addEventListener("change", () => 
   {
-    var currentOption = select.options[select.selectedIndex];
+    const currentOption = select.options[select.selectedIndex];
+
+    console.log(previousOption.text, previousOption.value);
+    console.log(currentOption.text, currentOption.value);
 
     [currentOption.text, currentOption.value] = [currentOption.value, currentOption.text];
 
