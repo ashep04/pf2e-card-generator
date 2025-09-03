@@ -27,143 +27,144 @@
   </div>
 
   <div class="page">
-    <div class="grid" id="grid">
-      <div class="feat-card" id="card0">
-        <div class="feat-card-inner">
-          <input type="text" class="spell-level" placeholder="Spell Level" autocomplete="off">
-          <div id="feat-header">
-            <input type="text" class="feat-name" placeholder="Spell Name" autocomplete="off">
+    <div class="grid">
+      <div class="card">
+        <div class="card-inner">
+          <input type="text" class="level" placeholder="Level" autocomplete="off">
+
+          <div id="card-title">
+            <input type="text" class="name" placeholder="Name" autocomplete="off">
             <select class="action-cost" autocomplete="off">
               <option value=""></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              <option value="1">One Action</option>
+              <option value="2">Two Actions</option>
+              <option value="3">Three Actions</option>
+              <option value="4">Free Action</option>
+              <option value="5">Reaction</option>
             </select>
           </div>
           <hr />
 
-          <div class="feat-traits" id="feat-traits">
+          <div class="traits" id="traits">
             <button class="add-trait" id="add-trait">+</button>
           </div>
           <hr class="trait-hr" />
 
           <div class="possible-final">
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Cast:
-                <span contenteditable="true" class="feat-info-input" placeholder="Cast" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Cast" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Trigger:
-                <span contenteditable="true" class="feat-info-input" placeholder="Trigger" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Trigger" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Range:
-                <span contenteditable="true" class="feat-info-input" placeholder="Range" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Range" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Area:
-                <span contenteditable="true" class="feat-info-input" placeholder="Area" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Area" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Targets:
-                <span contenteditable="true" class="feat-info-input" placeholder="Targets" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Targets" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Saving Throw:
-                <span contenteditable="true" class="feat-info-input" placeholder="Saving Throw" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Saving Throw" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Duration:
-                <span contenteditable="true" class="feat-info-input" placeholder="Duration" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Duration" autocomplete="off"></span>
               </p>
             </div>
             <hr class="final-hr" />
           </div>
 
-          <div>
-            <div class="feat-info">
+          <div class="possible-final">
+            <div class="info">
               <p>
                 Frequency:
-                <span contenteditable="true" class="feat-info-input" placeholder="Frequency" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Frequency" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Trigger:
-                <span contenteditable="true" class="feat-info-input" placeholder="Trigger" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Trigger" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Requirement:
-                <span contenteditable="true" class="feat-info-input" placeholder="Requirement" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Requirement" autocomplete="off"></span>
               </p>
             </div>
-            <hr class="info-hr" />
+            <hr class="final-hr" />
           </div>
 
           <div class="possible-final">
-            <div class="feat-info">
-              <span contenteditable="true" class="feat-info-input" autocomplete="off">Description</span>
+            <div class="info">
+              <span contenteditable="true" class="info-input" autocomplete="off">Description</span>
             </div>
             <hr class="final-hr" />
           </div>
 
           <div class="possible-final">
-            <div class="feat-info">
-              <span contenteditable="true" class="feat-info-input" placeholder="Other actions" autocomplete="off"></span>
+            <div class="info">
+              <span contenteditable="true" class="info-input" placeholder="Other" autocomplete="off"></span>
             </div>
             <hr class="final-hr" />
           </div>
 
           <div class="possible-final">
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Critical Success:
-                <span contenteditable="true" class="feat-info-input" placeholder="Critical Success" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Critical Success" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Success:
-                <span contenteditable="true" class="feat-info-input" placeholder="Success" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Success" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Failure:
-                <span contenteditable="true" class="feat-info-input" placeholder="Failure" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Failure" autocomplete="off"></span>
               </p>
             </div>
-            <div class="feat-info">
+            <div class="info">
               <p>
                 Critical Failure:
-                <span contenteditable="true" class="feat-info-input" placeholder="Critical Failure" autocomplete="off"></span>
+                <span contenteditable="true" class="info-input" placeholder="Critical Failure" autocomplete="off"></span>
               </p>
             </div>
             <hr class="final-hr" />
           </div>
 
           <div class="possible-final heightened">
-            <div class="feat-info" id="baseHeightened">
+            <div class="info heightened">
               <p>
-                Heightened (<span style="font-weight:bold" contenteditable="true" class="feat-info-input" placeholder="Level" autocomplete="off"></span>)
-                <span contenteditable="true" class="feat-info-input" placeholder="Heightened effect" autocomplete="off"></span>
+                Heightened (<span style="font-weight:bold" contenteditable="true" class="info-input" placeholder="Level" autocomplete="off"></span>)
+                <span contenteditable="true" class="info-input" placeholder="Heightened effect" autocomplete="off"></span>
               </p>
             </div>
             <button class="add-heightened">+</button>

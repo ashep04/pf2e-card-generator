@@ -11,131 +11,60 @@ const actionMap =
 
 document.addEventListener("DOMContentLoaded", () => 
 {
-  const grid = document.getElementById("grid");
-  const baseCard = document.getElementById("card0");
-  const baseHeightened = document.getElementById("baseHeightened").cloneNode(true);
+  const grid = document.querySelector(".grid");
+  const baseCard = document.querySelector(".card");
+  const baseHeightened = document.querySelector(".info.heightened").cloneNode(true);
 
-  attachButton(baseCard);
+  // Fill out grid of cards
+  setupCard(baseCard, baseHeightened);
   for (let i = 1; i < 8; i++)
   {
     var newCard = baseCard.cloneNode(true);
-    newCard.setAttribute("id", `card${i}`);
     grid.appendChild(newCard);
-    attachButton(newCard);
-    heightenedButton(newCard, baseHeightened);
+    setupCard(newCard, baseHeightened);
   }
-  const featCards = document.querySelectorAll(".feat-card-inner");
 
+  var cards = document.querySelectorAll(".card-inner");
   var actionSelects = document.querySelectorAll(".action-cost");
-  var featNames = document.querySelectorAll(".feat-name");
-  window.addEventListener("beforeprint", () => 
-  {
-    actionSelects.forEach(select => resizeSelect(select));
-  });
+  var names = document.querySelectorAll(".name");
 
   window.matchMedia('print').addEventListener('change', (e) => 
   {
     if (e.matches) 
     {
-      featNames.forEach(name => autoSizeFont(name));
-      featCards.forEach(card => 
+      // On print screen open
+      textToSymbol(actionMap);
+
+      actionSelects.forEach(select => resizeSelect(select));
+      names.forEach(name => autoSizeFont(name));
+
+      cards.forEach(card => 
       {
-        replaceSymbols(card, actionMap);
         checkOverflow(card);
       });
     }
     else
     {
-      featCards.forEach(card => 
-      {
-        restoreSymbols(card, actionMap);
-      });
+      // On print screen close
+      symbolToText(actionMap);
       document.querySelectorAll("*").forEach(element => 
       {
+        // Reset to default styling
         element.style.all = null;
       });
     }
   });
-
-  var allSelects = document.querySelectorAll(".action-cost");
-  allSelects.forEach(setupSelect);
 });
 
-function replaceSymbols(card, dictionary)
+function setupCard(card, baseHeightened)
 {
-    var spans = card.querySelectorAll(".feat-info-input");
-
-    spans.forEach(span => 
-    {
-      var text = span.textContent;
-
-      for (var [word, mappedWord] of Object.entries(dictionary))
-      {
-        var escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        var regex = new RegExp(`${escapedWord}`, 'gi');
-        text = text.replace(regex, `<span class="action-text">${mappedWord}</span>`);
-      }
-
-      span.innerHTML = text;
-    });
+  attachHeightenedButton(card, baseHeightened);
+  attachTraitButton(card);
+  setupSelect(card)
 }
 
-function restoreSymbols(card, dictionary) {
-    var spans = card.querySelectorAll(".feat-info-input");
-
-    spans.forEach(span => {
-        var html = span.innerHTML;
-
-        console.log(html);
-        for (var [word, mappedWord] of Object.entries(dictionary)) 
-        {
-            var regex = new RegExp(`<span class="action-text">${mappedWord}</span>`, 'gi');
-            html = html.replace(regex, word);
-        }
-
-        span.innerHTML = html;
-    });
-}
-
-function checkOverflow(card)
-{
-  var textBoxes = card.querySelectorAll(".feat-info p, .feat-info-input");
-
-  var min = 1;
-  var max = 13;
-  var iteration = 0;
-
-  while (iteration < 20)
-  {
-    var mid = (min + max) / 2;
-    textBoxes.forEach(box => box.style.fontSize = mid + "px");
-
-    if (card.scrollHeight > card.clientHeight)
-    {
-      max = mid;
-    }
-    else
-    {
-      min = mid; 
-    }
-
-    iteration++;
-  }
-
-  textBoxes.forEach(box => box.style.fontSize = min + "px");
-}
-
-// Attach functionality for trait addition buttons
-function attachButton(card)
-{
-  var addButton = card.querySelector(".add-trait");
-  addButton.onclick = () =>
-  {
-    card.querySelector("#feat-traits").insertBefore(createTrait(), addButton);
-  };
-}
-
-function heightenedButton(card, heightened)
+// Attach functionality to heightened addition button
+function attachHeightenedButton(card, heightened)
 {
   var addButton = card.querySelector(".add-heightened");
 
@@ -146,16 +75,81 @@ function heightenedButton(card, heightened)
   };
 }
 
+// Attach functionality to trait addition button
+function attachTraitButton(card)
+{
+  var addButton = card.querySelector(".add-trait");
+  addButton.onclick = () =>
+  {
+    card.querySelector("#traits").insertBefore(createTrait(), addButton);
+  };
+}
+
 function createTrait()
 {
-  const span = document.createElement("span");
+  let span = document.createElement("span");
   span.contentEditable = "true";
-  span.className = "feat-trait";
+  span.className = "trait";
   span.setAttribute("type", "text");
   span.setAttribute("size", "1");
   span.setAttribute("autocomplete", "off");
   span.textContent = "Trait";
   return span;
+}
+
+// Changes the select option to the symbol
+function setupSelect(card)
+{
+  select = card.querySelector(".action-cost");
+
+  let previousOption = select.options[select.selectedIndex];
+  [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
+
+  select.addEventListener("change", () => 
+  {
+    var currentOption = select.options[select.selectedIndex];
+
+    [currentOption.text, currentOption.value] = [currentOption.value, currentOption.text];
+
+    [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
+ 
+    previousOption = currentOption;
+  });
+}
+
+function textToSymbol(dictionary)
+{
+    var spans = document.querySelectorAll(".info-input");
+
+    spans.forEach(span => 
+    {
+      var text = span.textContent;
+
+      for (var [word, mappedWord] of Object.entries(dictionary))
+      {
+        var escapedWord = word.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp(`${escapedWord}`, 'gi');
+        text = text.replace(regex, `<span class="action-text">${mappedWord}</span>`);
+      }
+
+      span.innerHTML = text;
+    });
+}
+
+function symbolToText(dictionary) {
+    var spans = document.querySelectorAll(".info-input");
+
+    spans.forEach(span => {
+        var html = span.innerHTML;
+
+        for (var [word, mappedWord] of Object.entries(dictionary)) 
+        {
+            var regex = new RegExp(`<span class="action-text">${mappedWord}</span>`, 'gi');
+            html = html.replace(regex, word);
+        }
+
+        span.innerHTML = html;
+    });
 }
 
 // Resize action cost box
@@ -192,20 +186,30 @@ function autoSizeFont(name)
   }
 }
 
-// Changes the select option to the symbol
-function setupSelect(select)
+function checkOverflow(card)
 {
-  let previousOption = select.options[select.selectedIndex];
-  [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
+  var textBoxes = card.querySelectorAll(".info p, .info-input");
 
-  select.addEventListener("change", () => 
+  var min = 1;
+  var max = 13;
+  var iteration = 0;
+
+  while (iteration < 20)
   {
-    var currentOption = select.options[select.selectedIndex];
+    var mid = (min + max) / 2;
+    textBoxes.forEach(box => box.style.fontSize = mid + "px");
 
-    [currentOption.text, currentOption.value] = [currentOption.value, currentOption.text];
+    if (card.scrollHeight > card.clientHeight)
+    {
+      max = mid;
+    }
+    else
+    {
+      min = mid; 
+    }
 
-    [previousOption.text, previousOption.value] = [previousOption.value, previousOption.text];
- 
-    previousOption = currentOption;
-  });
+    iteration++;
+  }
+
+  textBoxes.forEach(box => box.style.fontSize = min + "px");
 }

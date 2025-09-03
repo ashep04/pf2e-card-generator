@@ -69,7 +69,7 @@ body
     grid-template-columns: repeat(4, auto);
     grid-template-rows: repeat(2, auto);
 }
-.feat-card
+.card
 {
     position: relative;
     z-index: 1;
@@ -81,7 +81,7 @@ body
     overflow: hidden;
     background: black;
 }
-.feat-card::before
+.card::before
 {
     content: "";
     position: absolute;
@@ -90,14 +90,14 @@ body
     inset: 0;
     border-radius: .8em;
 }
-.feat-card-inner
+.card-inner
 {
     overflow: auto;
     position: relative;
     height: 100%;
     width: 100%;
 }
-.spell-level
+.level
 {
     font-family: "Gandhi Sans";
     box-sizing: border-box;
@@ -106,22 +106,22 @@ body
     margin: 0;
     padding: 0;
 }
-.action-cost
-{
-    font-family: "Pathfinder Actions";
-    box-sizing: border-box;
-}
-#feat-header
+#card-title
 {
     display: grid;
     width: 100%;
     box-sizing: border-box;
     margin: 0;
 }
-#feat-header > * 
+#card-title > * 
 {
     min-width: 0;
     line-height: 1;
+}
+.action-cost
+{
+    font-family: "Pathfinder Actions";
+    box-sizing: border-box;
 }
 hr
 {
@@ -132,7 +132,17 @@ hr
     margin-top: 1px;
     margin-bottom: 1px;
 }
-.feat-trait
+.traits
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+    margin-top: 2px;  
+    margin-bottom: 2px;  
+}
+.trait
 {
     font-family: "Myriad Apple";
     font-size: 8pt;
@@ -145,41 +155,31 @@ hr
     padding-right: 3px;
     padding-top: 3px;
 }
-.feat-traits
-{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-items: center;
-    width: 100%;
-    margin-top: 2px;  
-    margin-bottom: 2px;  
-}
-.feat-info
+.info
 {
     display: flex;
     align-items: center;
     margin: 0;
 }
-.feat-info p, .feat-info-input
+.info p, .info-input
 {
     font-family: "Gandhi Sans";
     font-size: 8pt;
     margin: 0;
     padding: 0;
 }
-.feat-info p
+.info p
 {
     font-weight: bold;
 }
-.feat-info-input
+.info-input
 {
     font-weight: normal;
     display: inline;
     white-space: pre-wrap;
     word-break: break-word;
 }
-.feat-info-input:empty:before
+.info-input:empty:before
 {
     content: attr(placeholder);
     color: gray;
@@ -201,6 +201,13 @@ hr
     height: 100%;
     top: 50%;
 }
+.horizontal-line
+{
+    height: 1px;
+    width: .4in;
+    background: black;
+    justify-self: center;
+}
 .horizontal-lines.left
 {
     left: 0;
@@ -208,13 +215,6 @@ hr
 .horizontal-lines.right
 {
     right: 0;
-}
-.horizontal-line
-{
-    height: 1px;
-    width: .4in;
-    background: black;
-    justify-self: center;
 }
 .vertical-lines
 {
@@ -225,6 +225,13 @@ hr
     grid-auto-columns: 2.5in;
     width: 100%;
 }
+.vertical-line
+{
+    width: 1px;
+    height: .65in;
+    background: black;
+    justify-self: center;
+}
 .vertical-lines.top
 {
     top: 0;
@@ -233,32 +240,29 @@ hr
 {
     bottom: 0;
 }
-.vertical-line
+.level
 {
-    width: 1px;
-    height: .65in;
-    background: black;
-    justify-self: center;
+    border: none;
+    background: none;
 }
-.feat-name::placeholder
+.level:placeholder-shown
 {
-    color: transparent;
+    display: none;
 }
-.feat-name
+#card-title
+{
+    grid-template-columns: 1fr auto;
+}
+.name
 {
     border: none;
     font-family: "Jubilee";
     font-size: 16pt;
     text-align: left;
 }
-.spell-level
+.name::placeholder
 {
-    border: none;
-    background: none;
-}
-.spell-level:placeholder-shown
-{
-    display: none;
+    color: transparent;
 }
 .action-cost
 {
@@ -272,23 +276,19 @@ hr
     padding: 0;
     color: black;
 }
-#feat-header
-{
-    grid-template-columns: 1fr auto;
-}
 .add-trait,
 .add-heightened,
-.feat-traits:not(:has(.feat-trait)),
-.feat-traits:not(:has(.feat-trait)) + .trait-hr,
-.feat-info-input:empty, 
-.feat-info:has(.feat-info-input:empty) p,
+.traits:not(:has(.trait)),
+.traits:not(:has(.trait)) + .trait-hr,
+.info-input:empty, 
+.info:has(.info-input:empty) p,
 .info-hr,
 .final-hr
 {
     display: none;
 }
-.feat-info:has(.feat-info-input:not(:empty)) ~ .info-hr,
-.possible-final:has(.feat-info-input:not(:empty)):has(~ div span:not(:empty)) .final-hr
+.info:has(.info-input:not(:empty)) ~ .info-hr,
+.possible-final:has(.info-input:not(:empty)):has(~ div span:not(:empty)) .final-hr
 {
     display: block;
 }
@@ -296,13 +296,13 @@ hr
 
 @media screen
 {
+#card-title
+{
+    grid-template-columns: 3fr 1fr;
+}
 .action-cost
 {
     font-size: 16pt;
-}
-#feat-header
-{
-    grid-template-columns: 3fr 1fr;
 }
 .add-trait, 
 .add-heightened
