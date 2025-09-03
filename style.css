@@ -1,24 +1,317 @@
-body 
+@font-face
 {
-    font-family: Arial, sans-serif;
-    padding: 50px;
+    font-family: "Jubilee";
+    src: url(Fonts/Jubilee/OTJubilee-GoldenMedium.otf) format("opentype");
 }
-ul 
+@font-face
 {
-    list-style-type: none; 
+    font-family: "Jubilee";
+    src: url(Fonts/Jubilee/OTJubilee-GoldenExtrabold.otf) format("opentype");
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: "EB Garamond";
+    src: url(Fonts/EB-Garamond/EBGaramond-Regular.ttf) format("truetype");
+}
+@font-face
+{
+    font-family: "Gandhi Sans";
+    src: url(Fonts/Gandhi-Sans/GandhiSans-Regular.otf) format("opentype");
+}
+@font-face
+{
+    font-family: "Gandhi Sans";
+    src: url(Fonts/Gandhi-Sans/GandhiSans-Bold.otf) format("opentype");
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: "Pathfinder Actions";
+    src: url(Fonts/Pathfinder2eActions/Pathfinder2eActions.ttf) format("truetype");
+}
+@font-face
+{
+    font-family: "Myriad Apple";
+    src: url(Fonts/Myriad-Apple-Text/MYRIADAM.TTF) format("truetype");
+}
+
+@media print, screen
+{
+html, body
+{
+    height: 100%;
+    margin: 0;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10.5in;
+    height: 8in;
+    margin: 0.25in;
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+.grid
+{
+    display: grid;
+    gap: 0;
+    place-content: center;
+    place-items: center;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(2, auto);
+}
+.feat-card
+{
+    position: relative;
+    z-index: 1;
+    width: 2.5in;
+    height: 3.5in;
+    padding: 0.125in;
+    border: solid black 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: black;
+}
+.feat-card::before
+{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: white;
+    inset: 0;
+    border-radius: .8em;
+}
+.feat-card-inner
+{
+    overflow: auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.spell-level
+{
+    font-family: "Gandhi Sans";
+    box-sizing: border-box;
+    font-size: 7pt;
+    width: 100%;
+    margin: 0;
     padding: 0;
 }
-li 
+.action-cost
 {
-    margin: 10px 0; 
+    font-family: "Pathfinder Actions";
+    box-sizing: border-box;
 }
-a 
+#feat-header
 {
-    text-decoration: none;
-    color: #007BFF;
-    font-size: 18px;
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
 }
-a:hover 
+#feat-header > * 
 {
-    text-decoration: underline;
+    min-width: 0;
+    line-height: 1;
+}
+hr
+{
+    background: black;
+    border: none;
+    height: 2px;
+    border-radius: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+.feat-trait
+{
+    font-family: "Myriad Apple";
+    font-size: 8pt;
+    color: white;
+    background: #5c0b0c;
+    border: none;
+    min-width: 1ch;
+    box-sizing: content-box;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+}
+.feat-traits
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+    margin-top: 2px;  
+    margin-bottom: 2px;  
+}
+.feat-info
+{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.feat-info p, .feat-info-input
+{
+    font-family: "Gandhi Sans";
+    font-size: 8pt;
+    margin: 0;
+    padding: 0;
+}
+.feat-info p
+{
+    font-weight: bold;
+}
+.feat-info-input
+{
+    font-weight: normal;
+    display: inline;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.feat-info-input:empty:before
+{
+    content: attr(placeholder);
+    color: gray;
+}
+.action-text
+{
+    font-family: "Pathfinder Actions";
+}
+}
+
+@media print
+{
+.horizontal-lines
+{
+    position: fixed;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: 2.5in;
+    height: 100%;
+    top: 50%;
+}
+.horizontal-lines.left
+{
+    left: 0;
+}
+.horizontal-lines.right
+{
+    right: 0;
+}
+.horizontal-line
+{
+    height: 1px;
+    width: .4in;
+    background: black;
+    justify-self: center;
+}
+.vertical-lines
+{
+    position: fixed;
+    justify-content: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 2.5in;
+    width: 100%;
+}
+.vertical-lines.top
+{
+    top: 0;
+}
+.vertical-lines.bottom
+{
+    bottom: 0;
+}
+.vertical-line
+{
+    width: 1px;
+    height: .65in;
+    background: black;
+    justify-self: center;
+}
+.feat-name::placeholder
+{
+    color: transparent;
+}
+.feat-name
+{
+    border: none;
+    font-family: "Jubilee";
+    font-size: 16pt;
+    text-align: left;
+}
+.spell-level
+{
+    border: none;
+    background: none;
+}
+.spell-level:placeholder-shown
+{
+    display: none;
+}
+.action-cost
+{
+    font-size: 30px;
+    background: none;
+    border: none;
+    appearance: none;
+    text-align: right;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+#feat-header
+{
+    grid-template-columns: 1fr auto;
+}
+.add-trait,
+.add-heightened,
+.feat-traits:not(:has(.feat-trait)),
+.feat-traits:not(:has(.feat-trait)) + .trait-hr,
+.feat-info-input:empty, 
+.feat-info:has(.feat-info-input:empty) p,
+.info-hr,
+.final-hr
+{
+    display: none;
+}
+.feat-info:has(.feat-info-input:not(:empty)) ~ .info-hr,
+.possible-final:has(.feat-info-input:not(:empty)):has(~ div span:not(:empty)) .final-hr
+{
+    display: block;
+}
+}
+
+@media screen
+{
+.action-cost
+{
+    font-size: 16pt;
+}
+#feat-header
+{
+    grid-template-columns: 3fr 1fr;
+}
+.add-trait, 
+.add-heightened
+{
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
 }
